@@ -1,0 +1,162 @@
+<template name="materias">
+<!-- ********************** MODAL INFO DE LA MATERIA *********************-->
+<div class="modal" id="modalMateriaInfo" role="dialog">									  	
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+      	
+        
+        <div class="modal-body">
+			<div class="panel panel-info">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Información de la materia</h3>
+			  	</div>					  	
+			  	<div class="panel-body">
+			  		<table class="table table-hover">
+				  		<thead>
+					      <tr>
+				          	<th class="col-xs-4"></th>
+				          	<th class="col-xs-8"></th>	                    
+					      </tr>
+					    </thead>				
+					    <tbody>
+					      <tr>
+					      	<td><strong><p>Materia</p></strong></td>
+					      	<td>{{materiaInfo.nombre}}</td>
+					      </tr>		    						      
+					      <tr>
+					      	<td><strong><p>Carrera</p></strong></td>
+					      	<td>{{materiaInfo.nombreCarrera}}</td>
+					      </tr>
+					      <tr>
+					      	<td><strong><p>Docente</p></strong></td>
+					      	<td>{{materiaInfo.nombreDocente}}</td>
+					      </tr>	      						      					      						      
+					    </tbody>	
+					</table>
+			  		<div class="form-group">
+					  <label for="usr">Comentarios de la materia</label>
+					  <textarea disabled class="form-control" rows="5" id="descripcion" value={{materiaInfo.descripcion}}></textarea>
+					</div> 
+			  	
+			    
+			  	</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+<!-- ******************MODAL EDITAR MATERIA********************************-->
+<div class="modal" id="modalMateriaEditar" role="dialog">
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="form" id="formModificarMateria">			
+        <div class="modal-body">
+			<div class="panel panel-warning">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Editar materia</h3>
+			  	</div>					  	
+			  	<div class="panel-body">			  		
+				  	<div class="form-group">
+					  <label for="usr">Nombre</label>
+					  <input type="text" class="form-control" id="nombre" value={{materiaEditar.nombre}}>
+					</div>					
+					<div class="form-group">
+					  <label for="carrera">Carrera</label>
+					  <input class="form-control typeahead" name="team" type="text"										       
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="carreras1"
+				       	data-select="selecCarrera"
+				       	value={{materiaEditar.nombreCarrera}}>
+					</div>
+					<div class="form-group">
+					  <label for="docente">Docente</label>
+					  <input class="form-control typeahead" name="team" type="text"										       
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="docentes1"
+				       	data-select="selecDocente"
+				       	value={{materiaEditar.nombreDocente}}>
+					</div>					
+					<div class="form-group">
+					  <label for="usr">Descripcion de la materia</label>
+					  <textarea class="form-control" rows="5" id="descripcion" value={{materiaEditar.descripcion}}></textarea>
+					</div>
+			  	</div>
+			</div>
+        </div> 
+
+        <div class="modal-footer">
+			<button type="submit" id="submit" class="btn btn-success">Guardar</button>						        	
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>   
+		</form>	       
+          
+      </div>
+      
+    </div>
+</div>
+
+<!--********************************************************************************************************************-->
+
+	<div class="panel panel-success">
+	  	<div class="panel-heading"><strong><h3>Lista de materias</h3></strong></div>
+	  	<div class="panel-body">		    
+		    <div class="col-lg-12">
+			    <a class="btn btn-success btn-md" href="{{ pathFor 'materia_form'}}">
+					Añadir nuevo materia
+				</a>					
+		      		{{> EasySearch.Input index=materias attributes=searchAttributes }}
+		      		<hr />
+	      	</div>			
+			<div class="col-lg-12">
+				<table class="table table-hover">
+					<thead>
+				      <tr>
+			          	<th class="#80cbc4 teal-text">NOMBRE</th>
+			          	<th class="#80cbc4 teal-text">CARRERA</th>
+			          	<th class="#80cbc4 teal-text">DOCENTE</th>			          	
+			          	<th class="#80cbc4 teal-text">DNI</th>			          	
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	{{#EasySearch.Each index=materias}}	
+				      <tr>
+				        <td>{{nombre}}</td>
+				        <td>{{nombreCarrera}}</td>
+				        <td>{{nombreDocente}}</td>				        
+				        <td>{{dniDocente}}</td>				        
+				        <td>
+				        	<span class="right">				        	
+							<a href="#"	class="modalMateriaInfo btn btn-info btn-xs">Detalle</a>
+							<a href="#" class="modalMateriaEditar btn btn-warning btn-xs">Editar</a>							
+							</span>
+						</td>
+				      </tr>
+				      	{{/EasySearch.Each}}
+				    </tbody>	
+				</table>						
+
+				{{#EasySearch.IfNoResults index=materias}}
+					<p>No hay resultados ...</p>
+				{{/EasySearch.IfNoResults}}
+
+				{{#EasySearch.IfSearching index=materias}}
+					<p>Buscando ...</p>
+				{{/EasySearch.IfSearching}}
+			
+				{{>EasySearch.Pagination index=materias}}
+			</div>			
+		</div>		
+	</div>
+
+</template>

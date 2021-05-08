@@ -1,0 +1,177 @@
+<template name="mesas">
+<!-- ********************** MODAL INFO DE LA MATERIA *********************-->
+<div class="modal" id="modalMesaInfo" role="dialog">									  	
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+      	
+        
+        <div class="modal-body">
+			<div class="panel panel-info">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Información de la materia</h3>
+			  	</div>					  	
+			  	<div class="panel-body">
+			  		<table class="table table-hover">
+				  		<thead>
+					      <tr>
+				          	<th class="col-xs-4"></th>
+				          	<th class="col-xs-8"></th>	                    
+					      </tr>
+					    </thead>				
+					    <tbody>
+					      <tr>
+					      	<td><strong><p>Materia</p></strong></td>
+					      	<td>{{materiaInfo.nombre}}</td>
+					      </tr>		    						      
+					      <tr>
+					      	<td><strong><p>Carrera</p></strong></td>
+					      	<td>{{materiaInfo.nombreCarrera}}</td>
+					      </tr>
+					      <tr>
+					      	<td><strong><p>Docente</p></strong></td>
+					      	<td>{{materiaInfo.nombreDocente}}</td>
+					      </tr>	      						      					      						      
+					    </tbody>	
+					</table>
+			  		<div class="form-group">
+					  <label for="usr">Comentarios de la materia</label>
+					  <textarea disabled class="form-control" rows="5" id="descripcion" value={{materiaInfo.descripcion}}></textarea>
+					</div> 
+			  	
+			    
+			  	</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+<!-- ******************MODAL EDITAR MATERIA********************************-->
+<div class="modal" id="modalMesaEditar" role="dialog">
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="form" id="formModificarMesa">			
+        <div class="modal-body">
+			<div class="panel panel-warning">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Editar mesa</h3>
+			  	</div>					  	
+			  	<div class="panel-body">			  		
+				  	<div class="form-group">
+					  <label for="llamado">Llamado</label>
+					  <input class="form-control typeahead" name="team" type="text"     
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="llamados1"
+				       	data-select="selecLlamado"/>
+					</div>						
+					<div class="form-group">
+					  <label for="materia">Materia</label>
+					  <input class="form-control typeahead" name="team" type="text"       
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="materias1"
+				       	data-select="selecMateria"/>
+					</div>
+					<div class="form-group">
+					  <label for="Presidente">Presidente</label>
+					  <input class="form-control typeahead" name="team" type="text"       
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="docentes1"
+				       	data-select="selecPresidente"/>
+					</div>
+					<div class="form-group">
+					  <label for="vocal1">Vocal 1</label>
+					  <input class="form-control typeahead" name="team" type="text"       
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="docentes1"
+				       	data-select="selecVocal1"/>
+					</div>
+					<div class="form-group">
+					  <label for="vocal2">Vocal 2</label>
+					  <input class="form-control typeahead" name="team" type="text"       
+				       	autocomplete="off" spellcheck="off"
+				       	data-source="docentes1"
+				       	data-select="selecVocal2"/>
+					</div>						
+					<div class="form-group">
+					  <label for="descripcion">Descripcion de la mesa</label>
+					  <textarea class="form-control" rows="5" id="descripcion"></textarea>
+					</div>
+			  	</div>
+			</div>
+        </div> 
+
+        <div class="modal-footer">
+			<button type="submit" id="submit" class="btn btn-success">Guardar</button>						        	
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>   
+		</form>	       
+          
+      </div>
+      
+    </div>
+</div>
+
+<!--********************************************************************************************************************-->
+
+	<div class="panel panel-success">
+	  	<div class="panel-heading"><strong><h3>Lista de mesas</h3></strong></div>
+	  	<div class="panel-body">		    
+		    <div class="col-lg-12">
+			    <a class="btn btn-success btn-md" href="{{ pathFor 'mesa_form'}}">
+					Añadir nueva mesa
+				</a>					
+		      		{{> EasySearch.Input index=mesas attributes=searchAttributes }}
+		      		<hr />
+	      	</div>			
+			<div class="col-lg-12">
+				<table class="table table-hover">
+					<thead>
+				      <tr>
+			          	<th class="#80cbc4 teal-text">NOMBRE</th>
+			          	<th class="#80cbc4 teal-text">LLAMADO</th>
+			          	<th class="#80cbc4 teal-text">NUMERO</th>			          	
+			          	<th class="#80cbc4 teal-text">MATERIA</th>			          	
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	{{#EasySearch.Each index=mesas}}	
+				      <tr>
+				        <td>{{nombre}}</td>
+				        <td>{{nombreLlamado}}</td>
+				        <td>{{numeroLlamado}}</td>				        
+				        <td>{{nombreMateria}}</td>				        
+				        <td>
+				        	<span class="right">				        	
+							<a href="#"	class="modalMesaInfo btn btn-info btn-xs">Detalle</a>
+							<a href="#" class="modalMesaEditar btn btn-warning btn-xs">Editar</a>							
+							</span>
+						</td>
+				      </tr>
+				      	{{/EasySearch.Each}}
+				    </tbody>	
+				</table>						
+
+				{{#EasySearch.IfNoResults index=mesas}}
+					<p>No hay resultados ...</p>
+				{{/EasySearch.IfNoResults}}
+
+				{{#EasySearch.IfSearching index=mesas}}
+					<p>Buscando ...</p>
+				{{/EasySearch.IfSearching}}
+			
+				{{>EasySearch.Pagination index=mesas}}
+			</div>			
+		</div>		
+	</div>
+
+</template>

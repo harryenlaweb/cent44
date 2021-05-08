@@ -1,0 +1,141 @@
+<template name="carreras">
+
+<!-- ********************** MODAL INFO DE LA CARRERA *********************-->
+<div class="modal" id="modalCarreraInfo" role="dialog">									  	
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+      	
+        
+        <div class="modal-body">
+			<div class="panel panel-info">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Información de la carrera</h3>
+			  	</div>					  	
+			  	<div class="panel-body">
+			  		<table class="table table-hover">
+				  		<thead>
+					      <tr>
+				          	<th class="col-xs-4"></th>
+				          	<th class="col-xs-8"></th>	                    
+					      </tr>
+					    </thead>				
+					    <tbody>
+					      <tr>
+					      	<td><strong><p>Nombre</p></strong></td>
+					      	<td>{{carreraInfo.nombre}}</td>
+					      </tr>		    	
+					      <tr>
+					      	<td><strong><p>Código</p></strong></td>
+					      	<td>{{carreraInfo.codigo}}</td>
+					      </tr>		      						      
+					    </tbody>	
+					</table>
+			  		<div class="form-group">
+					  <label for="usr">Descripción de la carrera</label>
+					  <textarea disabled class="form-control" rows="5" id="descripcion" value={{carreraInfo.descripcion}}></textarea>
+					</div> 			    
+			  	</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>      
+    </div>
+</div>
+
+
+<!-- ******************MODAL EDITAR CARREAS********************************-->
+<div class="modal" id="modalCarreraEditar" role="dialog">
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="form" id="formModificarCarrera">			
+        <div class="modal-body">
+			<div class="panel panel-warning">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Editar Carrera</h3>
+			  	</div>					  	
+			  	<div class="panel-body">
+				  	<div class="form-group">
+					  <label for="usr">Nombre</label>
+					  <input type="text" class="form-control" id="nombre" value={{carreraEditar.nombre}}>
+					</div>
+					<div class="form-group">
+					  <label for="usr">Código</label>
+					  <input type="text" class="form-control" id="codigo" value={{carreraEditar.codigo}}>
+					</div>					
+					<div class="form-group">
+					  <label for="usr">Descripcion de la carrera</label>
+					  <textarea class="form-control" rows="5" id="descripcion" value={{carreraEditar.descripcion}}></textarea>
+					</div>					
+			  	</div>
+			</div>
+        </div> 
+
+        <div class="modal-footer">
+			<button type="submit" id="submit" class="btn btn-success">Guardar</button>						        	
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>   
+		</form>	       
+          
+      </div>
+      
+    </div>
+</div>
+
+<!--****************************************FIN VENTANAS MODALES************************************************************-->
+	<div class="panel panel-success">
+	  	<div class="panel-heading"><strong><h3>Lista de carreras</h3></strong></div>
+	  	<div class="panel-body">		    
+		    <div class="col-lg-12">
+			    <a class="btn btn-success btn-md" href="{{ pathFor 'carrera_form'}}">
+					Añadir nueva carrera
+				</a>					
+		      		{{> EasySearch.Input index=carreras attributes=searchAttributes }}
+		      		<hr />
+	      	</div>			
+			<div class="col-lg-12">
+				<table class="table table-hover">
+					<thead>
+				      <tr>
+			          	<th class="#80cbc4 teal-text">NOMBRE</th>
+			          	<th class="#80cbc4 teal-text">CODIGO</th>			          	
+	                    <th class="#80cbc4 teal-text"></th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	{{#EasySearch.Each index=carreras}}	
+				      <tr>
+				        <td>{{nombre}}</td>
+				        <td>{{codigo}}</td>				        
+				        <td>
+				        	<span class="right">									
+							<a href="#"	class="modalCarreraInfo btn btn-info btn-xs">Detalle</a>
+							<a href="#" class="modalCarreraEditar btn btn-warning btn-xs">Editar</a>							
+							</span>
+						</td>
+				      </tr>
+				      	{{/EasySearch.Each}}
+				    </tbody>	
+				</table>						
+
+				{{#EasySearch.IfNoResults index=carreras}}
+					<p>No hay resultados ...</p>
+				{{/EasySearch.IfNoResults}}
+
+				{{#EasySearch.IfSearching index=carreras}}
+					<p>Buscando ...</p>
+				{{/EasySearch.IfSearching}}
+			
+				{{>EasySearch.Pagination index=carreras}}
+			</div>			
+		</div>		
+	</div>
+
+</template>

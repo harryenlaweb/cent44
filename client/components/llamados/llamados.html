@@ -1,0 +1,163 @@
+<template name="llamados">
+
+<!-- ********************** MODAL INFO DEL LLAMADO *********************-->
+<div class="modal" id="modalLlamadoInfo" role="dialog">									  	
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+      	
+        
+        <div class="modal-body">
+			<div class="panel panel-info">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Información del Llamado</h3>
+			  	</div>					  	
+			  	<div class="panel-body">
+			  		<table class="table table-hover">
+				  		<thead>
+					      <tr>
+				          	<th class="col-xs-4"></th>
+				          	<th class="col-xs-8"></th>	                    
+					      </tr>
+					    </thead>				
+					    <tbody>
+					      <tr>
+					      	<td><strong><p>Nombre</p></strong></td>
+					      	<td>{{llamadoInfo.nombre}}</td>
+					      </tr>		    	
+					      <tr>
+					      	<td><strong><p>Número</p></strong></td>
+					      	<td>{{llamadoInfo.numero}}</td>
+					      </tr>		      	
+					      <tr>
+					      	<td><strong><p>Fecha desde</p></strong></td>
+					      	<td>{{formatDate2 llamadoInfo.fechaDesde}}</td>
+					      </tr>
+					      <tr>
+					      	<td><strong><p>Fecha hasta</p></strong></td>
+					      	<td>{{formatDate2 llamadoInfo.fechaHasta}}</td>
+					      </tr>					      
+					    </tbody>	
+					</table>
+			  		<div class="form-group">
+					  <label for="usr">Descripcion del Llamado</label>
+					  <textarea disabled class="form-control" rows="5" id="descripcion" value={{llamadoInfo.descripcion}}></textarea>
+					</div> 
+			  	
+			    
+			  	</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+<!-- ******************MODAL EDITAR LLAMADOS********************************-->
+<div class="modal" id="modalLlamadoEditar" role="dialog">
+  	<div class="modal-dialog modal-md">										    
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="form" id="formModificarLlamado">			
+        <div class="modal-body">
+			<div class="panel panel-warning">
+			  	<div class="panel-heading">
+			  		<button type="button" class="close" data-dismiss="modal">&times;</button>          
+			  		<h3>Editar Llamado</h3>
+			  	</div>					  	
+			  	<div class="panel-body">
+				  	<div class="form-group">
+					  <label for="usr">Nombre</label>
+					  <input type="text" class="form-control" id="nombre" value={{llamadoEditar.nombre}}>
+					</div>
+					<div class="form-group">
+					  <label for="usr">Número</label>
+					  <input type="text" class="form-control" id="numero" value={{llamadoEditar.numero}}>
+					</div>
+					<div class="form-group">
+					  <label for="fechaDesde">Fecha desde</label>
+					  <input type="text" class="fechaDesde form-control" id="fechaDesde"  placeholder="dd-mm-aaaa" value={{formatDate2 llamadoEditar.fechaDesde}}>
+					</div>
+					<div class="form-group">
+					  <label for="fechaHasta">Fecha hasta</label>
+					  <input type="text" class="fechaHasta form-control" id="fechaHasta"  placeholder="dd-mm-aaaa" value={{formatDate2 llamadoEditar.fechaHasta}}>
+					</div>					
+					<div class="form-group">
+					  <label for="usr">Descripcion del Llamado</label>
+					  <textarea class="form-control" rows="5" id="descripcion" value={{llamadoEditar.descripcion}}></textarea>
+					</div>					
+			  	</div>
+			</div>
+        </div> 
+
+        <div class="modal-footer">
+			<button type="submit" id="submit" class="btn btn-success">Guardar</button>						        	
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>   
+		</form>	       
+          
+      </div>
+      
+    </div>
+</div>
+
+<!--****************************************FIN VENTANAS MODALES************************************************************-->
+	<div class="panel panel-success">
+	  	<div class="panel-heading"><strong><h3>Lista de llamados</h3></strong></div>
+	  	<div class="panel-body">		    
+		    <div class="col-lg-12">
+			    <a class="btn btn-success btn-md" href="{{ pathFor 'llamado_form'}}">
+					Añadir nuevo llamado
+				</a>					
+		      		{{> EasySearch.Input index=llamados attributes=searchAttributes }}
+		      		<hr />
+	      	</div>			
+			<div class="col-lg-12">
+				<table class="table table-hover">
+					<thead>
+				      <tr>
+			          	<th class="#80cbc4 teal-text">NOMBRE</th>
+			          	<th class="#80cbc4 teal-text">NUMERO</th>
+			          	<th class="#80cbc4 teal-text">DESDE</th>
+			          	<th class="#80cbc4 teal-text">HASTA</th>
+	                    <th class="#80cbc4 teal-text"></th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	{{#EasySearch.Each index=llamados}}	
+				      <tr>
+				        <td>{{nombre}}</td>
+				        <td>{{numero}}</td>
+				        <td>{{formatDate2 fechaDesde}}</td>
+				        <td>{{formatDate2 fechaHasta}}</td>
+				        <td>
+				        	<span class="right">									
+							<a href="#"	class="modalLlamadoInfo btn btn-info btn-xs">Detalle</a>
+							<a href="#" class="modalLlamadoEditar btn btn-warning btn-xs">Editar</a>					
+							</span>
+						</td>
+				      </tr>
+				      	{{/EasySearch.Each}}
+				    </tbody>	
+				</table>						
+
+				{{#EasySearch.IfNoResults index=llamados}}
+					<p>No hay resultados ...</p>
+				{{/EasySearch.IfNoResults}}
+
+				{{#EasySearch.IfSearching index=llamados}}
+					<p>Buscando ...</p>
+				{{/EasySearch.IfSearching}}
+			
+				{{>EasySearch.Pagination index=llamados}}
+			</div>			
+		</div>		
+	</div>
+
+</template>

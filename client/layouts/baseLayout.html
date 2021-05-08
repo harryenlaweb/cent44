@@ -1,0 +1,35 @@
+<template name="baseLayout">
+	<nav class="navbar navbar-default">
+	  	<div class="container"> 		  		
+	  			<ul class="nav navbar-nav">					
+					{{#if isInRole 'admin'}}						
+						<li><a href="{{ pathFor 'docentes'}}">Docentes</a></li>
+						<li><a href="{{ pathFor 'alumnos'}}">Alumnos</a></li>
+						<li><a href="{{ pathFor 'carreras'}}">Carreras</a></li>
+						<li><a href="{{ pathFor 'materias'}}">Materias</a></li>
+						<li><a href="{{ pathFor 'llamados'}}">Llamados</a></li>
+						<li><a href="{{ pathFor 'mesas'}}">Mesas</a></li>										
+					{{/if}}				
+					{{#if isInRole 'docente'}}												
+						<li><a href=#>A definir</a></li>																
+					{{/if}}	
+					{{#if isInRole 'alumno'}}												
+						<li><a href=#>A definir</a></li>																
+					{{/if}}	
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+			      
+			      <li><a href="#">{{> loginButtons}}</a></li>
+			      <div class="navbar-header">
+				      <a href="#" class="navbar-brand">CENT 44</a>
+				  </div>			      
+			      
+			    </ul>
+			
+		</div>
+	</nav>
+	<!--<div class="container">-->
+	<div class="container">
+		{{> yield}}	
+	</div>
+</template>

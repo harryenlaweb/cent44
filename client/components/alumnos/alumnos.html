@@ -1,0 +1,248 @@
+<template name="alumnos">
+<!-- ********************** MODAL INFO DEL ALUMNO *********************-->
+<div class="modal" id="modalAlumnoInfo" role="dialog">                      
+    <div class="modal-dialog modal-md">                       
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        
+        
+        <div class="modal-body">
+      <div class="panel panel-info">
+          <div class="panel-heading">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>          
+            <h3>Información del alumno</h3>
+          </div>              
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                    <th class="col-xs-4"></th>
+                    <th class="col-xs-8"></th>                      
+                </tr>
+              </thead>        
+              <tbody>
+                <tr>
+                  <td><strong><p>Nombre y Apellido</p></strong></td>
+                  <td>{{alumnoInfo.nombreApellido}}</td>
+                </tr>         
+                <tr>
+                  <td><strong><p>DNI</p></strong></td>
+                  <td>{{alumnoInfo.dni}}</td>
+                </tr>                 
+                <tr>
+                  <td><strong><p>telefono</p></strong></td>
+                  <td>{{alumnoInfo.telefono}}</td>
+                </tr>
+                <tr>
+                  <td><strong><p>Direccion</p></strong></td>
+                  <td>{{alumnoInfo.localidad}}</td>
+                </tr>
+                <tr>
+                  <td><strong><p>Provincia</p></strong></td>
+                  <td>{{alumnoInfo.provincia}}</td>
+                </tr>
+                <tr>
+                  <td><strong><p>Email</p></strong></td>
+                  <td>{{alumnoInfo.email}}</td>
+                </tr>                
+                <tr>
+                  <td><strong><p>Fecha de Nacimiento</p></strong></td>
+                  <td>{{formatDate2 alumnoInfo.fechaNacimiento}}</td>
+                </tr>
+                <tr>
+                  <td><strong><p>Fecha de Ingreso</p></strong></td>
+                  <td>{{formatDate2 alumnoInfo.fechaIngreso}}</td>
+                </tr>                
+              </tbody>  
+          </table>
+            <div class="form-group">
+            <label for="usr">Comentarios del alumno</label>
+            <textarea disabled class="form-control" rows="5" id="descripcion" value={{alumnoInfo.descripcion}}></textarea>
+          </div> 
+          
+          
+          </div>
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+</div>
+
+<!-- ****************** MODAL CAMBIAR PASS **********************************-->
+<div class="modal" id="modalAlumnoChangePass" role="dialog">
+    <div class="modal-dialog modal-md">                       
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="form" id="formChangePassAlumno">
+          <div class="modal-body">
+            
+              
+                <div class="panel panel-danger">
+                  <div class="panel-heading">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>          
+                      <h3>Cambiar Contraseña de alumno</h3>
+                  </div>              
+                  <div class="panel-body">              
+                      <div class="form-group">
+                          <label for="usr">Contraseña nueva</label>
+                          <input type="text" class="form-control" id="newpass" value={{alumnoChangePass.dni}}>
+                      </div>
+                      <div class="form-group">
+                          <label for="usr">Repetir contraseña nueva</label>
+                          <input type="text" class="form-control" id="newpassaux" value={{alumnoChangePass.dni}}>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                    <button type="submit" id="submit" class="btn btn-success">Enviar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            
+          
+        </form>        
+          
+      </div>
+      
+    </div>
+</div>
+
+<!-- ******************MODAL EDITAR ALUMNO********************************-->
+<div class="modal" id="modalAlumnoEditar" role="dialog">
+    <div class="modal-dialog modal-md">                       
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form class="form" id="formModificarAlumno">      
+          <div class="modal-body">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>          
+                    <h3>Editar alumno</h3>
+              </div>              
+              <div class="panel-body">            
+                    <div class="form-group">
+                    <label for="usr">Nombre y Apellido</label>
+                    <input type="text" class="form-control" id="nombreApellido" value={{alumnoEditar.nombreApellido}}>
+              </div>
+              <div class="form-group">          
+                    <label for="usr">DNI</label>
+                    <input type="text" class="form-control" id="dni" value={{alumnoEditar.dni}}>
+              </div>
+              <div class="form-group">          
+                    <label for="usr">Legajo</label>
+                    <input type="text" class="form-control" id="legajo" value={{alumnoEditar.legajo}}>
+              </div>          
+              <div class="form-group">
+                    <label for="usr">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" value={{alumnoEditar.telefono}}>
+              </div>
+              <div class="form-group">
+                    <label for="usr">Dirección</label>
+                    <input type="text" class="form-control" id="direccion" value={{alumnoEditar.direccion}}>
+              </div>
+              <div class="form-group">
+                    <label for="usr">Localidad</label>
+                    <input type="text" class="form-control" id="localidad" value={{alumnoEditar.localidad}}>
+              </div>
+              <div class="form-group">
+                    <label for="usr">Provincia</label>
+                    <input type="text" class="form-control" id="provincia" value={{alumnoEditar.provincia}}>
+              </div>
+              <div class="form-group">
+                    <label for="usr">Email</label>
+                    <input type="text" class="form-control" id="email" value={{alumnoEditar.email}}>
+              </div>
+              <div class="form-group">
+                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="text" class="fechaNacimiento form-control" id="fechaNacimiento2" placeholder="dd-mm-aaaa" value={{formatDate2 alumnoEditar.fechaNacimiento}}>
+              </div>
+              <div class="form-group">
+                    <label for="fechaIngreso">Fecha de Ingreso</label>
+                    <input type="text" class="fechaIngreso form-control" id="fechaIngreso2"  placeholder="dd-mm-aaaa" value={{formatDate2 alumnoEditar.fechaIngreso}}>
+              </div>                                
+              <div class="form-group">
+                    <label for="usr">Descripcion del alumno</label>
+                    <textarea class="form-control" rows="5" id="descripcion" value={{alumnoEditar.descripcion}}></textarea>
+              </div>
+              </div>
+          </div>
+        </div> 
+
+        <div class="modal-footer">
+      <button type="submit" id="submit" class="btn btn-success">Guardar</button>                      
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    </div>   
+    </form>        
+          
+      </div>
+      
+    </div>
+</div>
+
+<!--********************************************************************************************************************-->
+  
+         <div class="panel panel-success">
+              <div class="panel-heading"><strong><h3>Lista de alumnos</h3></strong></div>
+              <div class="panel-body">		    
+                <div class="col-lg-12">
+                    <a class="btn btn-success btn-md" href="{{ pathFor 'alumno_form'}}">
+                        Añadir nuevo alumno
+                    </a>					
+                          {{> EasySearch.Input index=alumnos attributes=searchAttributes }}
+                          <hr />
+                  </div>			
+                <div class="col-lg-12">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                              <th class="#80cbc4 teal-text">NOMBRE Y APELLIDO</th>
+                              <th class="#80cbc4 teal-text">EMAIL</th>
+                              <th class="#80cbc4 teal-text">DNI</th>
+                              <th class="#80cbc4 teal-text">CARRERA</th>
+                            <th class="#80cbc4 teal-text"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {{#EasySearch.Each index=alumnos}}	
+                          <tr>
+                            <td>{{nombreApellido}}</td>
+                            <td>{{email}}</td>
+                            <td>{{dni}}</td>
+                              {{#each miscarreras}}
+                                  <td>{{nombreCarrera}}</td>
+                              {{/each}}
+                            <td>
+                                <span class="right">		                                
+                                <a href="#"	class="modalAlumnoInfo btn btn-info btn-xs">Detalle</a>
+                                <a href="#" class="modalAlumnoEditar btn btn-warning btn-xs">Editar</a>                                
+                                <a href="#" class="modalAlumnoChangePass btn btn-danger btn-xs">Cambiar Pass</a>                                              
+                                </span>
+                            </td>
+                          </tr>
+                              {{/EasySearch.Each}}
+                        </tbody>	
+                    </table>						
+    
+                    {{#EasySearch.IfNoResults index=alumnos}}
+                        <p>No hay resultados ...</p>
+                    {{/EasySearch.IfNoResults}}
+    
+                    {{#EasySearch.IfSearching index=alumnos}}
+                        <p>Buscando ...</p>
+                    {{/EasySearch.IfSearching}}
+                
+                    {{>EasySearch.Pagination index=alumnos}}
+                </div>			
+            </div>		
+        </div>
+    
+    </template>

@@ -1,0 +1,75 @@
+<template name="docenteForm">
+	<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+
+	<div class="panel panel-success">
+
+	  	<div class="panel-heading"><strong><h3>Crear nuevo docente</h3></strong></div>
+	  	<div class="panel-body">		    
+		    <div class="col-lg-12">
+			    <a class="btn btn-success btn-md" href="{{ pathFor 'docentes'}}">
+			    	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					Volver al listado de docentes
+				</a>
+		      	<hr />
+	      	</div>			
+			<div class="col-lg-12">
+				<form class="form" id="docenteForm">
+			  			
+	  				<div class="panel-body">		    
+		    			<div class="form-group">
+						  <label for="usr">Nombre y Apellido</label>
+						  <input type="text" class="form-control" id="nombreApellido" >
+						</div>						
+						<div class="form-group">
+							<label for="usr">D.N.I.</label>
+							<input type="text" class="form-control" id="dni" placeholder="12345678" >
+						</div>
+						<div class="form-group">
+						  <label for="usr">Legajo</label>
+						  <input type="text" class="form-control" id="legajo" >
+						</div>						
+						<div class="form-group">
+						  <label for="usr">Teléfono</label>
+						  <input type="text" class="form-control" id="telefono" >
+						</div>						
+						<div class="form-group">
+						  <label for="usr">Dirección</label>
+						  <input type="text" class="form-control" id="direccion" >
+						</div>
+						<div class="form-group">
+						  <label for="usr">Localidad</label>
+						  <input type="text" class="form-control" id="localidad" >
+						</div>
+						<div class="form-group">
+						  <label for="usr">Provincia</label>
+						  <input type="text" class="form-control" id="provincia" >
+						</div>						
+						<div class="form-group">
+						  <label for="usr">Email</label>
+						  <input type="text" class="form-control" id="email" >
+						</div>
+						<div class="form-group">
+						  <label for="usr">Fecha Nacimiento</label>
+						  <input type="date" class="form-control" id="fechaNacimiento" placeholder="dd-mm-aaaa">
+						</div>
+						<div class="form-group">
+						  <label for="usr">Fecha de Ingreso</label>
+						  <input type="date" class="form-control" id="fechaIngreso"  placeholder="dd-mm-aaaa">
+						</div>	
+						<div class="form-group">
+						  <label for="descripcion">Descripcion del docente</label>
+						  <textarea class="form-control" rows="5" id="descripcion"></textarea>
+						</div>							
+					</div>		
+					<div class="modal-footer">
+						<button type="submit" id="submit" class="btn btn-success">Guardar</button>						
+					</div>	
+				</form>	
+			</div>			
+		</div>		
+	</div>
+	</div>
+	</div>
+
+</template>
